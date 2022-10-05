@@ -55,9 +55,9 @@ export class UpperPart {
         modelMatrix.translate(-0.4, 0.4, 0);
         this.cabin.draw(shaderInfo, elapsed, modelMatrix);
 
-        modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(1.5, 1.5, 1.5);
-        this.leftArm.draw(shaderInfo, elapsed, modelMatrix);
+        // modelMatrix = this.stack.peekMatrix();
+        // modelMatrix.translate(1.5, 1.5, 1.5);
+        // this.leftArm.draw(shaderInfo, elapsed, modelMatrix);
     }
 }
 
