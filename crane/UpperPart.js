@@ -16,9 +16,9 @@ export class UpperPart {
             { red: 0.4, green: 0.4, blue: 0.4, alpha: 1});
         this.cylinder.initBuffers();
 
-        this.cylinderUpperRigt = new Cylinder(app, {red: 0.5, green: 0.5, blue: 0.9, alpha: 1},
+        this.cylinderUpperRight = new Cylinder(app, {red: 0.5, green: 0.5, blue: 0.9, alpha: 1},
             { red: 0.1, green: 0.5, blue: 0.9, alpha: 1});
-        this.cylinderUpperRigt.initBuffers();
+        this.cylinderUpperRight.initBuffers();
 
         this.sphere = new Sphere(app, {red: 0.5, green: 0.5, blue: 0.5, alpha: 1});
         this.sphere.initBuffers();
@@ -59,37 +59,39 @@ export class UpperPart {
 
     draw(shaderInfo, elapsed, modelMatrix = new Matrix4()) {
         modelMatrix.setIdentity();
-        modelMatrix.translate(this.translationX, 10, 0);
+        modelMatrix.translate(this.translationX, 10.7, 0);
         modelMatrix.rotate(this.rotationY, 0, 1, 0);
         this.stack.pushMatrix(modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.scale(1.4, 0.9, 1.4);
+        modelMatrix.scale(2, 0.9, 2);
         this.cylinder.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.scale(1.8, 1.9, 1.5);
-        modelMatrix.translate(-0.4, 0.4, 0);
+        modelMatrix.scale(2.4, 2.4, 2.4);
+        modelMatrix.translate(-0.4, 0.37, 0);
         this.cabin.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 1, 0);
+        modelMatrix.translate(1.5, 1.7, 0.5);
         this.stack.pushMatrix(modelMatrix);
         this.rightArm.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
         this.rightArmUpper.draw(shaderInfo, elapsed, modelMatrix);
+
         modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(-3, 0.5, 0);
         this.leftArm.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.scale(1.5, 1.4, 1.5);
-        modelMatrix.translate(4.8, 5, 0);
-        this.cylinderUpperRigt.draw(shaderInfo, elapsed, modelMatrix);
-
-        modelMatrix = this.stack.peekMatrix();
-        modelMatrix.scale(1.5, 1.4, 1.5);
-        this.rightWire.draw(shaderInfo, elapsed, modelMatrix);
+        modelMatrix.scale(1.8, 1.4, 1.8);
+        modelMatrix.translate(4, 5, -0.3);
+        this.cylinderUpperRight.draw(shaderInfo, elapsed, modelMatrix);
+        //
+        // modelMatrix = this.stack.peekMatrix();
+        // modelMatrix.scale(1.5, 1.4, 1.5);
+        // this.rightWire.draw(shaderInfo, elapsed, modelMatrix);
     }
 }
 

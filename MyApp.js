@@ -19,9 +19,8 @@ export class MyApp extends BaseApp {
     }
 
     draw(elapsed, modelMatrix = new Matrix4()) {
-        this.camera.setLookAt(0, 10, 0);
+        this.camera.setLookAt(0, 7, 0);
         super.draw(elapsed);
-        // this.xzplane.draw(this.baseShaderInfo, elapsed, modelMatrix);
         this.crane.draw(this.baseShaderInfo, elapsed, modelMatrix);
     }
 }

@@ -57,67 +57,63 @@ export class Crane {
         modelMatrix.setIdentity();
         modelMatrix.translate(this.translationX, -0.3, 0);
         this.stack.pushMatrix(modelMatrix);
-        modelMatrix.scale(3, 0.3, 1);
+        modelMatrix.scale(5, 0.5, 3);
         this.cubeBottom.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.rotate(90, 1, 0, 0);
-        modelMatrix.scale(0.4, 0.4, 0.4);
-        modelMatrix.translate(-5, 2.5, 0.8);
+        modelMatrix.scale(0.8, 0.8, 0.8);
+        modelMatrix.translate(3.8, 3.7, 0.7);
         this.stack.pushMatrix(modelMatrix);
         this.cylinder.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, -6, 0);
+        modelMatrix.translate(-7.6, 0, 0);
         this.stack.pushMatrix(modelMatrix);
         this.cylinder.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(10, 0, 0);
+        modelMatrix.translate(0, -8.4, 0);
         this.stack.pushMatrix(modelMatrix);
         this.cylinder.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 6, 0);
-        this.stack.pushMatrix(modelMatrix);
+        modelMatrix.translate(7, 0, 0);
         this.cylinder.draw(shaderInfo, elapsed, modelMatrix);
 
         this.stack.popMatrix(); //NB!
         this.stack.popMatrix(); //NB!
         this.stack.popMatrix(); //NB!
-        this.stack.popMatrix(); //NB!
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 0.08, 1.2);
-        modelMatrix.scale(2.0, 0.02, 0.2);
+        modelMatrix.translate(0, 0.2, 3.2);
         this.stack.pushMatrix(modelMatrix);
+        modelMatrix.scale(3, 0.03, 0.6);
         this.cubeCaterpillar.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, -40, 0);
-        this.stack.pushMatrix(modelMatrix);
+        modelMatrix.translate(0, -1.5, 0);
+        modelMatrix.scale(3, 0.03, 0.5);
         this.cubeCaterpillar.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 0, -12);
-        this.stack.pushMatrix(modelMatrix);
+        modelMatrix.translate(0, 0, -6.5);
+        modelMatrix.scale(3, 0.03, 0.5);
         this.cubeCaterpillar.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
-        modelMatrix.translate(0, 40, 0);
+        modelMatrix.translate(0, -1.5, -6.5);
+        modelMatrix.scale(3, 0.03, 0.5);
         this.cubeCaterpillar.draw(shaderInfo, elapsed, modelMatrix);
-
         this.stack.popMatrix(); //NB!
-        this.stack.popMatrix(); //NB!
-        this.stack.popMatrix(); //NB!
 
         modelMatrix = this.stack.peekMatrix();
-        this.tower.draw(shaderInfo, elapsed, modelMatrix);
+        modelMatrix.translate(0, 0.5, 0.5);
+        this.tower.draw(shaderInfo, elapsed, modelMatrix, this.stack);
 
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.translate(0, -20, 0);
         this.upperPart.draw(shaderInfo, elapsed, modelMatrix);
-
 
         this.stack.empty();
     }

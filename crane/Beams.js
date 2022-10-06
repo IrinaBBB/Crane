@@ -39,7 +39,7 @@ export class Beams {
         }
     }
 
-    draw(shaderInfo, elapsed, modelMatrix = new Matrix4()) {
+    draw(shaderInfo, elapsed, modelMatrix = new Matrix4(), stack) {
         this.createBeams(modelMatrix, shaderInfo, elapsed);
     }
 
@@ -48,8 +48,30 @@ export class Beams {
         modelMatrix.translate(this.translationX, this.translationY, 0);
         modelMatrix.rotate(this.rotationZ, 0, 0, 1);
         modelMatrix.rotate(this.rotationY, 1, 0, 0);
+        modelMatrix.rotate(0, 0, 1, 0);
         this.stack.pushMatrix(modelMatrix);
+        this.create2DBeamElement(modelMatrix, shaderInfo, elapsed);
 
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.rotate(90, 0, 1, 0);
+        modelMatrix.translate(0.5, 0, 0.5);
+        this.stack.pushMatrix(modelMatrix);
+        this.create2DBeamElement(modelMatrix, shaderInfo, elapsed);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.rotate(90, 0, 1, 0);
+        modelMatrix.translate(0.5, 0, 0.5);
+        this.stack.pushMatrix(modelMatrix);
+        this.create2DBeamElement(modelMatrix, shaderInfo, elapsed);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.rotate(90, 0, 1, 0);
+        modelMatrix.translate(0.5, 0, 0.5);
+        this.stack.pushMatrix(modelMatrix);
+        this.create2DBeamElement(modelMatrix, shaderInfo, elapsed);
+    }
+
+    create2DBeamElement(modelMatrix, shaderInfo, elapsed) {
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.rotate(90, 0, 0, 1);
         modelMatrix.translate(0, -0.5, 0);
@@ -59,6 +81,7 @@ export class Beams {
         this.stack.popMatrix();
 
         for (let i = 1; i < 8; i++) {
+
             modelMatrix = this.stack.peekMatrix();
             modelMatrix.translate(0.5, i * 1.5, 0);
             modelMatrix.rotate(180, 0, 0, 1);
