@@ -41,10 +41,6 @@ export class Crane {
         this.sphere = new Sphere(app);
         this.sphere.initBuffers();
 
-        // this.torus = new Torus(app, {red: 0.4, green: 0.4, blue: 0.4, alpha: 1.0});
-        // this.torus.isWireframe = true;
-        // this.torus.initBuffers();
-
         this.translationX = 0;
     }
 
@@ -62,7 +58,7 @@ export class Crane {
         modelMatrix.translate(this.translationX, -0.3, 0);
         this.stack.pushMatrix(modelMatrix);
         modelMatrix.scale(3, 0.3, 1);
-        //this.cubeBottom.draw(shaderInfo, elapsed, modelMatrix);
+        this.cubeBottom.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
         modelMatrix.rotate(90, 1, 0, 0);
@@ -119,6 +115,7 @@ export class Crane {
         this.tower.draw(shaderInfo, elapsed, modelMatrix);
 
         modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(0, -20, 0);
         this.upperPart.draw(shaderInfo, elapsed, modelMatrix);
 
         this.stack.empty();

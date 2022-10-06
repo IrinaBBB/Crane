@@ -14,13 +14,12 @@ export class MyApp extends BaseApp {
     handleKeys(elapsed) {
         super.handleKeys(elapsed);
         this.crane.handleKeys(elapsed);
-        this.crane.tower.handleKeys(elapsed);
         this.crane.upperPart.handleKeys(elapsed);
-        //this.crane.torus.handleKeys(elapsed);
+        this.crane.upperPart.leftArm.handleKeys(elapsed);
     }
 
     draw(elapsed, modelMatrix = new Matrix4()) {
-        this.camera.setLookAt(0, 6, 0);
+        this.camera.setLookAt(0, 10, 0);
         super.draw(elapsed);
         // this.xzplane.draw(this.baseShaderInfo, elapsed, modelMatrix);
         this.crane.draw(this.baseShaderInfo, elapsed, modelMatrix);

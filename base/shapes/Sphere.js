@@ -53,9 +53,6 @@ export class Sphere extends BaseShape {
                 this.indices.push(first + 1);
             }
         }
-        console.log(this.positions);
-        console.log(this.indices);
-        console.log(this.colors);
     }
 
     draw(shaderInfo, elapsed, modelMatrix = (new Matrix4()).setIdentity()) {
