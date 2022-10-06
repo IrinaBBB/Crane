@@ -118,6 +118,7 @@ export class Crane {
         modelMatrix.translate(0, -20, 0);
         this.upperPart.draw(shaderInfo, elapsed, modelMatrix);
 
+
         this.stack.empty();
     }
 }

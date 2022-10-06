@@ -5,6 +5,7 @@ import {Sphere} from '../base/shapes/Sphere.js';
 import {Cylinder} from '../base/shapes/Cylinder.js';
 import {Cabin} from "./Cabin.js";
 import {Beams} from "./Beams.js";
+import {Wire} from "./Wire.js";
 
 export class UpperPart {
     constructor(app) {
@@ -36,6 +37,9 @@ export class UpperPart {
 
         this.cabin = new Cabin(app);
         this.cabin.initBuffers();
+
+        this.rightWire = new Wire(app);
+        this.rightWire.initBuffers();
 
         this.translationX = 0;
         this.rotationY = 0;
@@ -82,6 +86,10 @@ export class UpperPart {
         modelMatrix.scale(1.5, 1.4, 1.5);
         modelMatrix.translate(4.8, 5, 0);
         this.cylinderUpperRigt.draw(shaderInfo, elapsed, modelMatrix);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.scale(1.5, 1.4, 1.5);
+        this.rightWire.draw(shaderInfo, elapsed, modelMatrix);
     }
 }
 
