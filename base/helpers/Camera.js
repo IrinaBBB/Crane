@@ -9,7 +9,7 @@ export class Camera {
         currentlyPressedKeys = [],
         camPosX=0,
         camPosY=0,
-        camPosZ=35,
+        camPosZ=40,
         lookAtX=0,
         lookAtY=0,
         lookAtZ=0,

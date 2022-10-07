@@ -34,6 +34,7 @@ export class UpperPart {
         this.leftArm = new Beams(app);
         this.leftArm.haveSpheres = false;
         this.leftArm.rotationZ = 60;
+        this.leftArm.frontBeam = true;
 
         this.cabin = new Cabin(app);
         this.cabin.initBuffers();
@@ -41,8 +42,22 @@ export class UpperPart {
         this.rightWire = new Wire(app);
         this.rightWire.initBuffers();
 
+        this.upperWire = new Wire(app);
+        this.upperWire.initBuffers();
+
+        this.leftWire = new Wire(app);
+        this.leftWire.initBuffers();
+
         this.translationX = 0;
         this.rotationY = 0;
+
+        this.upperWireLength = 18;  // 16.5
+        this.upperWireAngle = 183; // 178
+
+        this.leftWireX = -12; // -11
+        this.leftWireY = -3; // -0.8
+
+        this.cylinderY = -3;
     }
 
     handleKeys(elapsed) {
@@ -54,6 +69,24 @@ export class UpperPart {
         }
         if (this.app.currentlyPressedKeys[82]) {    //r
             this.rotationY = this.rotationY - 30 * elapsed;
+        }
+
+        if (this.app.currentlyPressedKeys[73]) {    // i
+            this.upperWireLength = (this.upperWireLength > 16.5) ? this.upperWireLength - 5 * elapsed : 16.5;
+            this.upperWireAngle = (this.upperWireAngle > 178) ? this.upperWireAngle - 10 * elapsed : 178;
+
+            this.leftWireX = (this.leftWireX < -11) ? this.leftWireX + 0.1  : -11;
+            this.leftWireY = (this.leftWireY < -0.8) ? this.leftWireY + 0.4 * elapsed : -0.8;
+
+            this.cylinderY = (this.cylinderY > -3) ? this.cylinderY + 1 * elapsed : -3;
+        }
+
+        if (this.app.currentlyPressedKeys[79]) {    // o
+            this.upperWireLength = (this.upperWireLength < 18) ? this.upperWireLength + 3 * elapsed : 18;
+            this.upperWireAngle = (this.upperWireAngle < 183) ? this.upperWireAngle + 6.5 * elapsed : 183;
+
+            this.leftWireX = (this.leftWireX > -12) ? this.leftWireX - 0.05  : -12;
+            this.leftWireY = (this.leftWireY > -1.8) ? this.leftWireY - 0.05 * elapsed : -1.8;
         }
     }
 
@@ -88,10 +121,29 @@ export class UpperPart {
         modelMatrix.scale(1.8, 1.4, 1.8);
         modelMatrix.translate(4, 5, -0.3);
         this.cylinderUpperRight.draw(shaderInfo, elapsed, modelMatrix);
-        //
-        // modelMatrix = this.stack.peekMatrix();
-        // modelMatrix.scale(1.5, 1.4, 1.5);
-        // this.rightWire.draw(shaderInfo, elapsed, modelMatrix);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.scale(8, 8, 8);
+        modelMatrix.translate(0.9, 0, 0);
+        modelMatrix.rotate(90, 0, 0, 1);
+        this.rightWire.draw(shaderInfo, elapsed, modelMatrix);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(6, 7, 0);
+        modelMatrix.rotate(this.upperWireAngle, 0, 0, 1);
+        modelMatrix.scale(this.upperWireLength, 0, 0);
+        this.upperWire.draw(shaderInfo, elapsed, modelMatrix);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.translate(this.leftWireX, this.leftWireY, -0.5);
+        modelMatrix.rotate(90, 0, 0, 1);
+        modelMatrix.scale(8, 0, 0);
+        this.leftWire.draw(shaderInfo, elapsed, modelMatrix);
+
+        modelMatrix = this.stack.peekMatrix();
+        modelMatrix.scale(1.8,1.4, 1.8);
+        modelMatrix.translate(-6.5, this.cylinderY, -0.5);
+        this.cylinderUpperRight.draw(shaderInfo, elapsed, modelMatrix);
     }
 }
 
